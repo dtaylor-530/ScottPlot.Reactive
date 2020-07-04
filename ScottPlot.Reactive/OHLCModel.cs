@@ -14,31 +14,25 @@ namespace ScottPlot.Reactive
     {
         private List<OHLC> data = new List<OHLC>();
         int index = 0;
-        private readonly SynchronizationContext mainThread;
         private readonly WpfPlot wpfPlot;
 
-        public OHLCModel(WpfPlot wpfPlot, IObservable<OHLC> dataObservable, IObservable<Unit> renderObservable = null)
+        public OHLCModel(WpfPlot wpfPlot, IObservable<OHLC> dataObservable, IObservable<Unit> renderObservable = null, IScheduler uiScheduler = null)
         {
-            mainThread = SynchronizationContext.Current;
-            //var plt = new ScottPlot.Plot(600, 400);
-            //wpfPlot.plt = plt;
+            uiScheduler ??= Scheduler.CurrentThread;
+
             this.wpfPlot = wpfPlot;
 
-            // signal.maxRenderIndex = 1;
-            // plot the data array only once
             dataObservable.Subscribe(d =>
             {
-                //signal.maxRenderIndex = index;
                 data.Add(d);
-
-
             });
 
             (renderObservable ?? dataObservable.Select(a => Unit.Default))
-                //.SubscribeOn(mainThread)
+                .SubscribeOn(uiScheduler)
                 .Subscribe(a =>
             {
-                mainThread.Send(a => Render(), null);
+                Render();
+                //mainThread.Send(a => Render(), null);
             });
 
         }
