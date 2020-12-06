@@ -7,7 +7,6 @@ namespace ScottPlot.Reactive.Demo
 {
     class DataSource
     {
-
         public static IObservable<double> ObserveValues()
         {
             var class3 = new DataFactory();
@@ -19,7 +18,6 @@ namespace ScottPlot.Reactive.Demo
 
             return obs;
         }
-
 
         public static IObservable<OHLC> ObserveOHLCValues()
         {

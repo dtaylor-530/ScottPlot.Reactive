@@ -8,9 +8,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <UniformGrid>
-        <ScottPlot:WpfPlot Name="wpfPlot1"/>
+        <ScottPlot:WpfPlot Name="wpfPlot1" />
         <ScottPlot:WpfPlot Name="wpfPlot2"/>
         <ScottPlot:WpfPlot Name="wpfPlot3"/>
+        <Grid Name="wpfPlot4"/>
+        <Grid Name="wpfPlot5"/>
         <local:PlotView x:Name="PlotView1"/>
     </UniformGrid>
 </Window>

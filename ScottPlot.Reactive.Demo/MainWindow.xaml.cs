@@ -1,20 +1,10 @@
 ﻿using ScottPlot.Demo.WPF.WpfDemos;
+using ScottPlot.Reactive.Demo.Infrastructure;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ScottPlot.Reactive.Demo
 {
@@ -42,6 +32,10 @@ namespace ScottPlot.Reactive.Demo
             var three = new DoubleModel(wpfPlot3, DataSource.ObserveValues());
 
             PlotView1.Data = DataGen.RandomStockPrices(new Random(), 200, sequential: true);
+
+            wpfPlot4.Children.Add(new WpfPlot(PlotFactory.CreateHistogramPlot()));
+
+            wpfPlot5.Children.Add(new WpfPlot(PlotFactory.CreateAdvancedStatisticsPlot()));
         }
     }
 }
